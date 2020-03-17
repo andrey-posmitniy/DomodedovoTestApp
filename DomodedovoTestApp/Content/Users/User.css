@@ -1,0 +1,7 @@
+﻿.user-image-medium {
+    cursor: pointer;
+}
+
+.user-image-large .modal-dialog {
+    width: 300px;
+}

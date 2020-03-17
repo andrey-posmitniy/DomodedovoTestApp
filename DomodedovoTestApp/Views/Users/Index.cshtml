@@ -1,0 +1,31 @@
+﻿@{
+    ViewBag.Title = "Список пользователей";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Scripts {
+    @Scripts.Render("~/Scripts/kendo/kendo.all.min.js")
+    @Scripts.Render("~/Scripts/kendo/cultures/kendo.culture.ru-RU.min.js")
+    @Scripts.Render("~/Scripts/kendo/messages/kendo.messages.ru-RU.min.js")
+    @Scripts.Render("~/Scripts/Users/Users.js")
+
+    <script>
+        var usersODataUrl = "@(Url.Content("~/") + "odata/ODataUsers")";
+        var userCardUrl = "@Url.Action("User", "Users")";
+    </script>
+}
+
+@section Styles {
+    @Styles.Render("~/Content/kendo/kendo.common.min.css")
+    @Styles.Render("~/Content/kendo/kendo.default.min.css")
+    @Styles.Render("~/Content/Users/Users.css")
+}
+
+
+<h2>@ViewBag.Title</h2>
+
+<div class="alert-warning">Email и пароль выведены только для того, чтобы можно было залогиниться (иначе их узнать можно только через БД).</div>
+<div class="alert-warning">В БД пароль хранится тоже только по этой причине - для теста. Иначе поля Users.PasswordPlain не было бы, а было только Users.PasswordHash.</div>
+<br/>
+
+<div id="grid"></div>

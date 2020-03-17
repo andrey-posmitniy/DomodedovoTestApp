@@ -1,0 +1,67 @@
+﻿@model DomodedovoTestApp.Models.UserCardModel
+
+@{
+    ViewBag.Title = @Model.FullName;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Scripts {
+    @Scripts.Render("~/Scripts/Users/User.js")
+}
+
+@section Styles {
+    @Styles.Render("~/Content/Users/User.css")
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div>
+    <hr />
+
+    @if (string.IsNullOrEmpty(Model.ErrorMessage))
+    {
+        <div style="float: left; margin-top: 20px;">
+            <img class="user-image-medium" src="@Model.PictureMedium" data-full-src="@Model.PictureLarge" />
+        </div>
+        <div style="float: left;">
+
+            <dl class="dl-horizontal">
+                <dt>@Html.DisplayNameFor(model => model.Surname)</dt>
+                <dd>@Html.DisplayFor(model => model.Surname)</dd>
+
+                <dt>@Html.DisplayNameFor(model => model.FirstName)</dt>
+                <dd>@Html.DisplayFor(model => model.FirstName)</dd>
+
+                <dt>@Html.DisplayNameFor(model => model.SecondName)</dt>
+                <dd>@Html.DisplayFor(model => model.SecondName)</dd>
+
+                <dt>@Html.DisplayNameFor(model => model.Phone)</dt>
+                <dd>@Html.DisplayFor(model => model.Phone)</dd>
+
+                <dt>@Html.DisplayNameFor(model => model.Email)</dt>
+                <dd><a href="mailto:@Model.Email">@Model.Email</a></dd>
+            </dl>
+
+        </div>
+    }
+    else
+    {
+        <div class="input-validation-error">@Model.ErrorMessage</div>
+    }
+
+</div>
+<div style="clear: both;">
+    @Html.ActionLink("Обратно к списку", "Index")
+</div>
+
+@*Диалог с большим изображением юзера*@
+<div class="user-image-large modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <img src="" class="imagepreview" style="width: 100%;">
+            </div>
+        </div>
+    </div>
+</div>

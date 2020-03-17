@@ -1,0 +1,57 @@
+﻿@model DomodedovoTestApp.Models.UsersGenerateModel
+
+@{
+    ViewBag.Title = "Генерация пользователей";
+}
+
+<h2>@ViewBag.Title</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.UsersExistsCount, htmlAttributes: new { @class = "control-label col-md-4" })
+            <div class="col-md-6 form-control-static">
+                @Html.ValueFor(model => model.UsersExistsCount)
+            </div>
+        </div>
+
+        <hr />
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.UsersCountToGenerate, htmlAttributes: new { @class = "control-label col-md-4" })
+            <div class="col-md-6">
+                @Html.EditorFor(model => model.UsersCountToGenerate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.UsersCountToGenerate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        @if (Model != null && !string.IsNullOrWhiteSpace(Model.ResultMessage))
+        {
+            <div class="form-group">
+                @Html.LabelFor(model => model.ResultMessage, htmlAttributes: new { @class = "control-label col-md-4" })
+                <div class="col-md-6 form-control-static text-success">
+                    @Html.ValueFor(model => model.ResultMessage)
+                </div>
+            </div>
+            <hr />
+        }
+
+        <div class="form-group">
+            <div class="col-md-offset-4 col-md-8">
+                <input type="submit" value="Генерировать" class="btn btn-default" />
+            </div>
+        </div>
+
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
